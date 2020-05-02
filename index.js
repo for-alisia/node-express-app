@@ -2,6 +2,10 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 
+const routerHome = require('./routes/home');
+const routerCourses = require('./routes/courses');
+const routerAdd = require('./routes/add');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -15,14 +19,9 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(express.static('public'));
-
-app.get('/', (req, res) => {
-    res.render('index');
-});
-
-app.get('/about', (req, res) => {
-    res.render('about');
-});
+app.use('/', routerHome);
+app.use('/courses', routerCourses);
+app.use('/add', routerAdd);
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
