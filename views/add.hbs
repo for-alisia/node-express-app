@@ -1,1 +1,23 @@
 <h1>Add New Course</h1>
+
+<form action="/add" method="POST">
+    <div class="input-field">
+        <input placeholder="Your title here" id="title" name="title" type="text" class="validate" required>
+        <label for="title">Enter a title of a new course</label>
+        <span class="helper-text" data-error="Enter the title"></span>
+    </div>
+    
+     <div class="input-field">
+        <input placeholder="Your price here" id="price" name="price" type="number" class="validate" required>
+        <label for="price">Enter a price of a new course</label>
+        <span class="helper-text" data-error="Enter the price"></span>
+    </div>
+
+    <div class="input-field">
+        <input placeholder="URL for your image here" id="image" name="image" type="text" class="validate" required>
+        <label for="image">Enter an image URL for a new course</label>
+        <span class="helper-text" data-error="Enter the image URL"></span>
+    </div>
+
+    <button class="btn cyan lighten-1">Add this course</button>
+</form>

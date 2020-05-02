@@ -19,6 +19,8 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(express.static('public'));
+app.use(express.urlencoded({extended: true}));
+
 app.use('/', routerHome);
 app.use('/courses', routerCourses);
 app.use('/add', routerAdd);
