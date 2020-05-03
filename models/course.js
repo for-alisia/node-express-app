@@ -23,7 +23,7 @@ class Course {
         await this.writeData(content);        
     }
 
-    static readData() {
+    static async readData() {
         return new Promise((resolve, reject) => {
             fs.readFile(
                 path.join(__dirname, '..', 'data', 'courses.json'), 
@@ -32,6 +32,12 @@ class Course {
             );
         });
       
+    }
+
+    static async getCourseById(id) {
+        const courses = await Course.readData();
+
+        return courses.find(el => el.id === id);
     }
 
     writeData(content) {
