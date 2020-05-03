@@ -17,14 +17,17 @@
     width: 30%;
 }
 
-.courses-cards .card-image {
-    width: 200px;
+.card-image {
     height: 200px;
 }
-
 .card-image img {
-    width: 100%;
+    width: 200px !important;
     height: auto;
     display: block;
-    margin: 0 auto;
+    left: 50% !important;
+    transform: translateX(-50%);
+
+}
+.price {
+    font-size: 1.5rem;
 }
