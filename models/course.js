@@ -34,13 +34,8 @@ class Course {
       
     }
 
-    static async getCourseById(id) {
-        const courses = await Course.readData();
-
-        return courses.find(el => el.id === id);
-    }
-
-    writeData(content) {
+    
+    static writeData(content) {
         return new Promise( (resolve, reject) => {
             fs.writeFile(
                 path.join(__dirname, '..', 'data', 'courses.json'),
@@ -49,6 +44,22 @@ class Course {
             );
         })
     }
+
+    static async getCourseById(id) {
+        const courses = await Course.readData();
+
+        return courses.find(el => el.id === id);
+    }
+
+    static async update(course) {
+        const courses = await this.readData();
+
+        const courseIndex = courses.findIndex(el => el.id === course.id);
+        courses[courseIndex] = course;
+
+        await Course.writeData(courses);
+    }
+
 
 }
 
