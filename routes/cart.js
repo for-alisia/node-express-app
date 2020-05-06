@@ -8,8 +8,15 @@ router.get('/', async (req, res) => {
     res.render('cart', {
         title: 'Cart',
         isCart: true,
-        cart
+        courses: cart.courses,
+        price: cart.price
     })
 });
+
+router.delete('/remove/:id', async (req, res) => {
+    const cart = await CartModel.removeById(req.params.id);
+    
+    res.json(cart)
+})
 
 module.exports = router;

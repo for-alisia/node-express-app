@@ -1,3 +1,29 @@
 <h1>Cart</h1>
+<div id="cart">
+{{#if courses.length}}
+<table>
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    {{#each courses}}
+    <tbody>
+        <tr>
+            <td>{{title}}</td>
+            <td>{{count}}</td>
+            <td class="price">{{price}}</td>
+            <td><button class="btn btn-primary remove-item" data-id="{{id}}">Delete</button></td>
+        </tr>
+    </tbody>
+    {{/each}}
+</table>
+<p>Total: <span class="price">{{price}}</span></p>
 
+{{else}}
 <p>Your courses will be here...</p>
+{{/if}}
+</div>
