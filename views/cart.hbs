@@ -10,18 +10,18 @@
             <th>Action</th>
         </tr>
     </thead>
-    {{#each courses}}
     <tbody>
+    {{#each courses}}
         <tr>
             <td>{{title}}</td>
             <td>{{count}}</td>
             <td class="price">{{price}}</td>
             <td><button class="btn btn-primary remove-item" data-id="{{id}}">Delete</button></td>
         </tr>
-    </tbody>
     {{/each}}
+    </tbody>
 </table>
-<p>Total: <span class="price">{{price}}</span></p>
+<p>Total: <span id="total" class="price">{{price}}</span></p>
 
 {{else}}
 <p>Your courses will be here...</p>
