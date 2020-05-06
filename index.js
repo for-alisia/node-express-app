@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const routerHome = require('./routes/home');
 const routerCourses = require('./routes/courses');
@@ -27,7 +28,23 @@ app.use('/courses', routerCourses);
 app.use('/add', routerAdd);
 app.use('/cart', routerCart);
 
-app.listen(PORT, () => {
-    console.log(`server is running on port ${PORT}`)
-    }   
-)
+async function start() {
+    try {
+        const url = 'mongodb+srv://for-alisia:Max2607Romanov@clustertest-zi0j3.mongodb.net/test?retryWrites=true&w=majority'
+        await mongoose.connect(url, {useNewUrlParser: true});
+    
+        
+        app.listen(PORT, () => {
+            console.log(`server is running on port ${PORT}`)
+        }   
+    )        
+    } catch (e) {
+        console.log(e);
+    }
+
+
+}
+
+start();
+
+
