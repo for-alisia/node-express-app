@@ -13,15 +13,15 @@ const PORT = process.env.PORT || 3000;
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
-    extname: 'hbs'
+    extname: 'hbs',
 });
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-app.use(express.static(path.join(__dirname,'public')));
-app.use(express.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/', routerHome);
 app.use('/courses', routerCourses);
@@ -30,21 +30,19 @@ app.use('/cart', routerCart);
 
 async function start() {
     try {
-        const url = 'mongodb+srv://for-alisia:Max2607Romanov@clustertest-zi0j3.mongodb.net/test?retryWrites=true&w=majority'
-        await mongoose.connect(url, {useNewUrlParser: true});
-    
-        
+        const url =
+            'mongodb+srv://for-alisia:Max2607Romanov@clustertest-zi0j3.mongodb.net/shop';
+        await mongoose.connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
         app.listen(PORT, () => {
-            console.log(`server is running on port ${PORT}`)
-        }   
-    )        
+            console.log(`server is running on port ${PORT}`);
+        });
     } catch (e) {
         console.log(e);
     }
-
-
 }
 
 start();
-
-

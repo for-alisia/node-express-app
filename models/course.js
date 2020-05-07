@@ -1,66 +1,15 @@
-const uuid = require('uuid').v4;
-const path = require('path');
-const fs = require('fs');
+const { Schema, model } = require('mongoose');
 
-class Course {
-    constructor(course) {
-        this.title = course.title;
-        this.price = course.price;
-        this.image = course.image;
-        this.id = uuid();
-    }
+const course = new Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    image: String,
+});
 
-    async save() {
-        const content = await Course.readData();
-
-        content.push({
-            title: this.title,
-            price: this.price,
-            image: this.image,
-            id: this.id
-        });
-
-        await this.writeData(content);        
-    }
-
-    static async readData() {
-        return new Promise((resolve, reject) => {
-            fs.readFile(
-                path.join(__dirname, '..', 'data', 'courses.json'), 
-                'utf-8', 
-                (err, content) =>  err ? reject(err) : resolve(JSON.parse(content))                
-            );
-        });
-      
-    }
-
-    
-    static writeData(content) {
-        return new Promise( (resolve, reject) => {
-            fs.writeFile(
-                path.join(__dirname, '..', 'data', 'courses.json'),
-                JSON.stringify(content),
-                (err) => err ? reject(err) : resolve()
-            );
-        })
-    }
-
-    static async getCourseById(id) {
-        const courses = await Course.readData();
-
-        return courses.find(el => el.id === id);
-    }
-
-    static async update(course) {
-        const courses = await this.readData();
-
-        const courseIndex = courses.findIndex(el => el.id === course.id);
-        courses[courseIndex] = course;
-
-        await Course.writeData(courses);
-    }
-
-
-}
-
-module.exports = Course;
+module.exports = model('Course', course);
